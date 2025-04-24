@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { PostsModule } from './posts/posts.module';
-import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { PostsModule } from './posts/posts.module';
+import { User } from './users/entities/user.entity';
+import { Post } from './posts/entities/post.entity';
 
 @Module({
   imports: [
@@ -10,15 +12,16 @@ import { UsersModule } from './users/users.module';
       type: 'postgres',
       host: 'localhost',
       port: 5432,
-      username: 'postgres',       
-      password: '',               
-      database: 'blogbd',         
-      autoLoadEntities: true,     
-      synchronize: false,          
+      username: 'postgres',
+      password: '',
+      database: 'blogbd',
+      entities: [User, Post],
+      synchronize: false,
     }),
-    PostsModule,
-    AuthModule,
+    TypeOrmModule.forFeature([User, Post]),
     UsersModule,
+    AuthModule,
+    PostsModule,
   ],
 })
 export class AppModule {}

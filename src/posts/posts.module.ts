@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm'; // импортируем TypeOrmModule
+import { TypeOrmModule } from '@nestjs/typeorm'; 
 import { PostsService } from './posts.service';
 import { PostsController } from './posts.controller';
-import { Post } from './entities/post.entity'; // импортируем сущность
+import { Post } from './entities/post.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Post])], // добавляем это
+  imports: [TypeOrmModule.forFeature([Post])],
   controllers: [PostsController],
   providers: [PostsService],
 })

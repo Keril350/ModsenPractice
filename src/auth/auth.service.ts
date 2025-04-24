@@ -10,10 +10,10 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(username: string, password: string) {
+  async validateUser(username: string, passwd: string) {
     const user = await this.usersService.findByUsername(username);
-    if (user && await bcrypt.compare(password, user.password)) {
-      const { password, ...result } = user;
+    if (user && await bcrypt.compare(passwd, user.passwd)) {
+      const { passwd, ...result } = user;
       return result;
     }
     return null;
@@ -26,8 +26,8 @@ export class AuthService {
     };
   }
 
-  async register(username: string, password: string) {
-    const hashedPassword = await bcrypt.hash(password, 10);
+  async register(username: string, passwd: string) {
+    const hashedPassword = await bcrypt.hash(passwd, 10);
     return this.usersService.create(username, hashedPassword);
   }
 }

@@ -9,5 +9,5 @@ export class User {
   username: string;
 
   @Column()
-  password: string;
+  passwd: string;
 }
