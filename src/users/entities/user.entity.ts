@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Comment } from '../../comments/entities/comment.entity';
 
 @Entity('users')
 export class User {
@@ -10,4 +11,7 @@ export class User {
 
   @Column()
   passwd: string;
+
+  @OneToMany(() => Comment, comment => comment.author, { cascade: true })
+  comments: Comment[];
 }

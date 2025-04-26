@@ -12,11 +12,11 @@ export class PostsService {
     private postsRepository: Repository<Post>,
   ) {}
 
-  async create(createPostDto: CreatePostDto): Promise<Post> {
+  async create(createPostDto: CreatePostDto & { author_id: number }): Promise<Post> {
     const post = this.postsRepository.create(createPostDto);
     return this.postsRepository.save(post);
   }
-
+  
   findAll(): Promise<Post[]> {
     return this.postsRepository.find();
   }
